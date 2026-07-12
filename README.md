@@ -32,7 +32,9 @@ See `.env.example`.
 - `NEXT_PUBLIC_SUPABASE_URL` — Supabase project URL.
 - `NEXT_PUBLIC_SUPABASE_ANON_KEY` — browser-safe anon key if later needed.
 - `SUPABASE_SERVICE_ROLE_KEY` — server-only key used by `/api/feedback`; never expose in client code.
-- `FEEDBACK_NOTIFICATION_EMAIL` — optional owner notification recipient.
+- `FEEDBACK_NOTIFICATION_EMAIL` — owner notification recipient; defaults to `theyellowmangostore@gmail.com` in the API route.
+- `RESEND_API_KEY` — optional server-only key for email notifications via Resend.
+- `FEEDBACK_FROM_EMAIL` — optional verified sender used for feedback notification emails.
 
 ## Sanity setup
 
@@ -57,7 +59,7 @@ Update `amazonUrlUS` or `amazonAttributionUrl` on each product in Sanity. The si
 
 Create a `feedback_submissions` table with fields matching the API payload: product id/name, category, customer name/email, optional order number, optional variant, rating, message, uploaded image URL, permission to contact, status, timestamps and page source.
 
-The API route stores submissions only when `NEXT_PUBLIC_SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` are configured. Without those variables it validates and returns success for local testing.
+The API route stores submissions only when `NEXT_PUBLIC_SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` are configured. Without those variables it validates and returns success for local testing. If `RESEND_API_KEY` is configured, the same private submission is emailed to `FEEDBACK_NOTIFICATION_EMAIL`.
 
 ## Vercel deployment
 
@@ -69,5 +71,11 @@ Import the GitHub repository into Vercel, set environment variables, and deploy.
 2. Visit `/feedback`.
 3. Select a product tab.
 4. Submit required fields.
-5. Confirm the success message appears.
-6. If Supabase variables are configured, confirm a new `feedback_submissions` row is created.
+5. Choose either `Satisfied` or `Not Satisfied`.
+6. Confirm the appropriate private-feedback confirmation message appears.
+7. If Supabase variables are configured, confirm a new `feedback_submissions` row is created.
+8. If Resend variables are configured, confirm the owner receives the notification email.
+
+## Feedback and review compliance
+
+The feedback flow stores private customer feedback and may optionally link satisfied customers to Amazon to share an honest public review. Do not offer cashback, refunds, gifts, discounts or any other incentive in exchange for Amazon reviews. Feedback submitted through this website must remain separate from Amazon product reviews.

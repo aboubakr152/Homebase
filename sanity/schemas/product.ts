@@ -1,0 +1,31 @@
+export default {
+  name: 'product', title: 'Product', type: 'document',
+  fields: [
+    { name: 'name', title: 'Product name', type: 'string', validation: (Rule: any) => Rule.required() },
+    { name: 'slug', title: 'URL slug', type: 'slug', options: { source: 'name' }, validation: (Rule: any) => Rule.required() },
+    { name: 'status', title: 'Product status', type: 'string', options: { list: ['active','draft','archived'] }, initialValue: 'draft' },
+    { name: 'featured', title: 'Featured status', type: 'boolean', initialValue: false },
+    { name: 'category', title: 'Category', type: 'reference', to: [{ type: 'category' }] },
+    { name: 'shortDescription', title: 'Short description', type: 'text' },
+    { name: 'description', title: 'Full description', type: 'text' },
+    { name: 'mainImage', title: 'Main product image', type: 'image', options: { hotspot: true }, fields: [{ name: 'alt', title: 'Alt text', type: 'string' }] },
+    { name: 'gallery', title: 'Gallery images', type: 'array', of: [{ type: 'image', options: { hotspot: true }, fields: [{ name: 'alt', title: 'Alt text', type: 'string' }] }] },
+    { name: 'lifestyleImages', title: 'Lifestyle images', type: 'array', of: [{ type: 'image', options: { hotspot: true }, fields: [{ name: 'alt', title: 'Alt text', type: 'string' }] }] },
+    { name: 'videoUrl', title: 'Video URL', type: 'url' },
+    { name: 'amazonUrlUS', title: 'Amazon.com URL', type: 'url', validation: (Rule: any) => Rule.uri({ scheme: ['https'] }) },
+    { name: 'amazonAttributionUrl', title: 'Amazon Attribution URL', type: 'url' },
+    { name: 'asinUS', title: 'Amazon ASIN', type: 'string', validation: (Rule: any) => Rule.regex(/^[A-Z0-9]{10}$/, { name: 'ASIN' }).warning() },
+    { name: 'buttonLabel', title: 'Amazon button label', type: 'string', options: { list: ['Buy on Amazon','Check Price on Amazon','View on Amazon'] } },
+    { name: 'colors', title: 'Available colors', type: 'array', of: [{ type: 'string' }] },
+    { name: 'models', title: 'Available models', type: 'array', of: [{ type: 'string' }] },
+    { name: 'benefits', title: 'Key benefits', type: 'array', of: [{ type: 'string' }] },
+    { name: 'features', title: 'Product features', type: 'array', of: [{ type: 'object', fields: [{ name: 'title', type: 'string' }, { name: 'text', type: 'text' }, { name: 'icon', type: 'string' }] }] },
+    { name: 'specifications', title: 'Specifications', type: 'array', of: [{ type: 'object', fields: [{ name: 'label', type: 'string' }, { name: 'value', type: 'string' }] }] },
+    { name: 'included', title: 'Package contents', type: 'array', of: [{ type: 'string' }] },
+    { name: 'instructions', title: 'Usage instructions', type: 'array', of: [{ type: 'string' }] },
+    { name: 'care', title: 'Care and cleaning instructions', type: 'array', of: [{ type: 'string' }] },
+    { name: 'faqs', title: 'Frequently asked questions', type: 'array', of: [{ type: 'object', fields: [{ name: 'question', type: 'string' }, { name: 'answer', type: 'text' }] }] },
+    { name: 'relatedProducts', title: 'Related products', type: 'array', of: [{ type: 'reference', to: [{ type: 'product' }] }] },
+    { name: 'seoTitle', title: 'SEO title', type: 'string' }, { name: 'seoDescription', title: 'SEO description', type: 'text' }, { name: 'socialImage', title: 'Social sharing image', type: 'image', options: { hotspot: true } }, { name: 'displayOrder', title: 'Display order', type: 'number' }
+  ]
+};

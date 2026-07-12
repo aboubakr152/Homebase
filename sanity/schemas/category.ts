@@ -1,0 +1,1 @@
+export default { name:'category', title:'Category', type:'document', fields:[{name:'title', title:'Category title', type:'string', validation:(Rule:any)=>Rule.required()},{name:'slug', title:'Slug', type:'slug', options:{source:'title'}},{name:'description', title:'Description', type:'text'}] };

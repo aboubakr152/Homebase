@@ -1,0 +1,1 @@
+export default { name:'feedbackProduct', title:'Feedback Product', type:'document', fields:[{name:'product', title:'Product', type:'reference', to:[{type:'product'}]},{name:'showFeedbackTab', title:'Show feedback tab', type:'boolean', initialValue:true}] };

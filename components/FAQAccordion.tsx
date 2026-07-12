@@ -1,0 +1,1 @@
+export function FAQAccordion({ faqs }: { faqs: { question: string; answer: string }[] }) { if(!faqs.length) return null; return <div className="accordion">{faqs.map((faq)=><details key={faq.question}><summary>{faq.question}</summary><p>{faq.answer}</p></details>)}</div> }

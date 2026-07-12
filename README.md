@@ -76,6 +76,16 @@ Import the GitHub repository into Vercel, set environment variables, and deploy.
 7. If Supabase variables are configured, confirm a new `feedback_submissions` row is created.
 8. If Resend variables are configured, confirm the owner receives the notification email.
 
+
+## Direct feedback links
+
+Use product-specific feedback links to preselect a listing:
+
+- `/feedback?product=manual-juicer`
+- `/feedback?product=potato-chipper`
+- `/feedback?product=tea-kettle`
+- `/feedback?product=thermos-bottle`
+
 ## Feedback and review compliance
 
 The feedback flow stores private customer feedback and may optionally link satisfied customers to Amazon to share an honest public review. Do not offer cashback, refunds, gifts, discounts or any other incentive in exchange for Amazon reviews. Feedback submitted through this website must remain separate from Amazon product reviews.

@@ -24,9 +24,10 @@ const emptyIntro: IntroState = {
   amazonOrderNumber: ''
 };
 
-export function FeedbackForm({ products }: { products: Product[] }) {
+export function FeedbackForm({ products, initialProductId = 'general' }: { products: Product[]; initialProductId?: string }) {
   const productOptions = useMemo(() => [{ _id: 'general', name: 'General Feedback', amazonUrlUS: '' }, ...products], [products]);
-  const [selectedProductId, setSelectedProductId] = useState(productOptions[0]._id);
+  const initialSelection = productOptions.some((product) => product._id === initialProductId) ? initialProductId : productOptions[0]._id;
+  const [selectedProductId, setSelectedProductId] = useState(initialSelection);
   const selected = productOptions.find((product) => product._id === selectedProductId) || productOptions[0];
   const isGeneralFeedback = selected._id === 'general';
   const [step, setStep] = useState<Step>('intro');
@@ -86,6 +87,10 @@ export function FeedbackForm({ products }: { products: Product[] }) {
     if (!res.ok) {
       setStatus(Object.values(data.errors || {}).join(' '));
       return;
+    }
+
+    if (!isGeneralFeedback && satisfaction === 'Satisfied') {
+      await navigator.clipboard?.writeText(feedbackMessage).catch(() => undefined);
     }
 
     setResult({
@@ -176,10 +181,9 @@ export function FeedbackForm({ products }: { products: Product[] }) {
             {result.satisfaction === 'Satisfied' && result.amazonUrl ? (
               <>
                 <h2>We&apos;ve got your order number.</h2>
-                <p>Please leave your honest review on Amazon when you are ready.</p>
+                <p>Your feedback has been copied to your clipboard. If you choose to leave an Amazon review, simply click paste on the next page.</p>
                 <p className="feedback-note">Your review means the world to us. Thank you for choosing The Yellow Mango.</p>
-                <a className="feedback-button" href={result.amazonUrl} target="_blank" rel="noopener noreferrer">View on Amazon</a>
-                <p className="feedback-compliance">The Yellow Mango does not provide cashback, vouchers, refunds, gifts, discounts, or any other incentive for Amazon reviews.</p>
+                <a className="feedback-button" href={result.amazonUrl} target="_blank" rel="noopener noreferrer">Leave Amazon Review</a>
               </>
             ) : (
               <>

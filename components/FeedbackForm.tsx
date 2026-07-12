@@ -181,7 +181,7 @@ export function FeedbackForm({ products, initialProductId = 'general' }: { produ
             {result.satisfaction === 'Satisfied' && result.amazonUrl ? (
               <>
                 <h2>We&apos;ve got your order number.</h2>
-                <p>Your feedback has been copied to your clipboard. If you choose to leave an Amazon review, simply click paste on the next page.</p>
+                <p>Your feedback has been copied to your clipboard. Once you open the Leave Amazon Review page, simply click paste and submit. Pictures and videos are highly appreciated.</p>
                 <p className="feedback-note">Your review means the world to us. Thank you for choosing The Yellow Mango.</p>
                 <a className="feedback-button" href={result.amazonUrl} target="_blank" rel="noopener noreferrer">Leave Amazon Review</a>
               </>

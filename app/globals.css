@@ -4,3 +4,5 @@
 @media(max-width:560px){.feedback-page-shell{padding:16px 12px}.feedback-tabs button{padding:9px 13px}.feedback-card{border-radius:14px}}
 .feedback-page-shell{background:linear-gradient(180deg,#fffaf0,#fff)!important}.feedback-card select{width:100%;font:inherit;border-radius:12px;border:1px solid #ddd;padding:12px 14px;background:#fff}.feedback-choice.two-col{grid-template-columns:1fr 1fr}.feedback-note{font-size:14px;color:var(--muted)!important}.feedback-compliance{font-size:12px;color:var(--muted)!important;margin-top:12px!important}
 @media(max-width:560px){.feedback-choice.two-col{grid-template-columns:1fr}}
+
+.feedback-page-intro{padding-bottom:30px!important}

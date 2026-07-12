@@ -9,7 +9,7 @@ export default async function Feedback({ searchParams }: { searchParams?: { prod
     <main className="feedback-page-shell">
       <section className="feedback-page-intro">
         <h1>Share Your Feedback</h1>
-        <p>Your feedback helps us improve our products and customer experience. Select your product below and tell us about your experience.</p>
+        <p>Your feedback helps us improve our products and customer experience.</p>
       </section>
       <FeedbackForm products={products} initialProductId={searchParams?.product} />
     </main>

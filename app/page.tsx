@@ -1,15 +1,6 @@
 import Link from 'next/link';
-
-export default function HomePage() {
-  return (
-    <main>
-      <section className="card">
-        <h1>Homebase Unified Project</h1>
-        <p>All 13 modules are integrated into one ready-to-run Next.js app.</p>
-        <p>
-          Continue to the <Link href="/dashboard">dashboard</Link>.
-        </p>
-      </section>
-    </main>
-  );
-}
+import { AmazonButton } from '@/components/AmazonButton';
+import { ProductGrid } from '@/components/ProductGrid';
+import { getFeaturedProducts } from '@/lib/sanity';
+import { categories } from '@/lib/products';
+export default async function HomePage(){const products=await getFeaturedProducts();return <main><section className="hero"><div><p className="eyebrow">Premium everyday essentials</p><h1>Everyday Products Made Better</h1><p>Practical, dependable products designed to make everyday tasks easier.</p><div className="actions"><Link className="btn btn-primary" href="/shop">Shop Our Products</Link><AmazonButton>Shop on Amazon</AmazonButton></div></div><div className="hero-art" role="img" aria-label="Warm premium kitchen lifestyle scene with Yellow Mango products"><span>Kitchen tools, drinkware & home essentials</span></div></section><section><h2>Explore Our Products</h2><ProductGrid products={products}/></section><section><h2>Made for Everyday Life</h2><div className="feature-grid">{[['Built for Daily Use','Reliable products designed for regular use.'],['Simple and Practical','Easy-to-use products without unnecessary complexity.'],['Thoughtful Design','Useful features designed around real everyday needs.'],['Available on Amazon','Purchase securely and conveniently through Amazon.com.']].map(([h,p])=><div className="feature" key={h}><span>✦</span><h3>{h}</h3><p>{p}</p></div>)}</div></section><section><h2>Shop by Category</h2><div className="category-grid">{categories.map((c)=><Link href={`/shop?category=${encodeURIComponent(c)}`} className="category" key={c}>{c}</Link>)}</div></section><section className="split"><div><h2>Meet The Yellow Mango</h2><p>The Yellow Mango creates practical products for the kitchen, home and everyday life. Our goal is simple: provide useful, dependable products that are easy to use and built to last.</p><Link className="btn btn-secondary" href="/about">Learn More About Us</Link></div><div><h2>Need Help With Your Product?</h2><p>Access product instructions, troubleshooting information and customer support.</p><div className="actions"><Link className="btn btn-primary" href="/support">Visit Support</Link><Link className="btn btn-secondary" href="/contact">Contact Us</Link></div></div></section><section className="newsletter"><h2>Stay Connected</h2><p>Receive product updates, useful tips and new product announcements.</p><form className="inline-form"><label>First Name<input /></label><label>Email Address<input type="email" /></label><button className="btn btn-primary" type="button">Subscribe</button></form><p className="small muted">Newsletter signup can be connected when an email marketing service is selected.</p></section></main>}

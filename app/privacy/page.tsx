@@ -1,0 +1,1 @@
+export const metadata={title:'Privacy Policy'};export default function Page(){return <main><section className="page-hero"><h1>Privacy Policy</h1><p>The Yellow Mango collects information submitted through forms to provide support, improve products and manage customer feedback. Purchases are completed on Amazon.com, and this website does not process payments.</p></section></main>}

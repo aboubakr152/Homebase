@@ -1,0 +1,1 @@
+module.exports = { content: ['./app/**/*.{ts,tsx}', './components/**/*.{ts,tsx}'], theme: { extend: { colors: { mango: '#f6b51e', orangeWarm: '#f97316', cream: '#fff8e7', charcoal: '#2f2418' } } }, plugins: [] };

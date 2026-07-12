@@ -1,0 +1,1 @@
+export const metadata={title:'About Us'};export default function Page(){return <main><section className="page-hero"><h1>Meet The Yellow Mango</h1><p>The Yellow Mango creates practical products for the kitchen, home and everyday life. Our goal is simple: provide useful, dependable products that are easy to use and built to last.</p></section></main>}

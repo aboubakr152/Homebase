@@ -1,0 +1,1 @@
+export const metadata={title:'Terms of Use'};export default function Page(){return <main><section className="page-hero"><h1>Terms of Use</h1><p>This website is a product catalogue and brand resource. Product purchases, order management and payment processing are handled by Amazon.com.</p></section></main>}

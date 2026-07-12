@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from 'react';
 import { amazonHref, type Product } from '@/lib/products';
-import { type SatisfactionOption } from '@/lib/validation';
+import { isValidAmazonOrderNumber, type SatisfactionOption } from '@/lib/validation';
 
 type Step = 'intro' | 'choice' | 'satisfied' | 'fiveStar' | 'dissatisfied' | 'done';
 
@@ -42,8 +42,16 @@ export function FeedbackForm({ products }: { products: Product[] }) {
 
   function continueToChoice() {
     setStatus('');
-    if (!intro.customerName.trim() || !intro.customerEmail.trim() || !intro.amazonOrderNumber.trim()) {
-      setStatus('Please enter your name, email address and Amazon order number.');
+    if (!intro.customerName.trim()) {
+      setStatus('Please enter your name.');
+      return;
+    }
+    if (!/^\S+@\S+\.\S+$/.test(intro.customerEmail.trim())) {
+      setStatus('Please enter a valid email address.');
+      return;
+    }
+    if (!isValidAmazonOrderNumber(intro.amazonOrderNumber)) {
+      setStatus('Please enter a valid Amazon order number. Dashes and spaces are okay, but it must contain 17 numbers.');
       return;
     }
     setStep('choice');
@@ -145,7 +153,6 @@ export function FeedbackForm({ products }: { products: Product[] }) {
         {step === 'fiveStar' ? (
           <>
             <h2>Would you give this product a 5 star review?</h2>
-            <p>If yes, we&apos;ll save your private feedback and show the Amazon link for this product. If no, we&apos;ll treat this as improvement feedback and keep it private.</p>
             <div className="feedback-choice two-col">
               <button className="feedback-button ok" type="button" disabled={busy} onClick={() => submitFeedback('Satisfied')}>{busy ? 'Submitting…' : 'Yes'}</button>
               <button className="feedback-button bad" type="button" disabled={busy} onClick={() => submitFeedback('Not Satisfied')}>{busy ? 'Submitting…' : 'No'}</button>

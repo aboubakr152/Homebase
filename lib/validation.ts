@@ -40,6 +40,14 @@ export type FeedbackPayload = {
   website?: string;
 };
 
+export function getAmazonOrderDigits(orderNumber = '') {
+  return orderNumber.replace(/\D/g, '');
+}
+
+export function isValidAmazonOrderNumber(orderNumber = '') {
+  return getAmazonOrderDigits(orderNumber).length === 17;
+}
+
 export function validateFeedback(input: Partial<FeedbackPayload>) {
   const errors: Record<string, string> = {};
   if (input.website) errors.website = 'Spam detected.';
@@ -47,7 +55,7 @@ export function validateFeedback(input: Partial<FeedbackPayload>) {
   if (!input.feedbackCategory || !feedbackCategories.includes(input.feedbackCategory)) errors.feedbackCategory = 'Choose a feedback category.';
   if (!input.customerName || input.customerName.trim().length < 2) errors.customerName = 'Enter your full name.';
   if (!input.customerEmail || !/^\S+@\S+\.\S+$/.test(input.customerEmail)) errors.customerEmail = 'Enter a valid email address.';
-  if (!input.amazonOrderNumber || input.amazonOrderNumber.trim().length < 3) errors.amazonOrderNumber = 'Enter your Amazon order number.';
+  if (!input.amazonOrderNumber || !isValidAmazonOrderNumber(input.amazonOrderNumber)) errors.amazonOrderNumber = 'Enter a valid Amazon order number with 17 digits.';
   if (!input.satisfaction || !satisfactionOptions.includes(input.satisfaction)) errors.satisfaction = 'Choose whether you were satisfied or not satisfied.';
   if (input.rating !== undefined && (input.rating < 1 || input.rating > 5)) errors.rating = 'Choose a rating from 1 to 5.';
   if (!input.message || input.message.trim().length < 10) errors.message = 'Please enter at least 10 characters.';
